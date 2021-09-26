@@ -1,9 +1,89 @@
 <template>
-  <h1>Hi</h1>
+  <form>
+    <label for="">City:</label>
+    <select name="" id="" v-model="city">
+      <option value="0" disabled>--Select City--</option>
+      <option
+        v-for="city in cities"
+        :key="city.prefCode"
+        :value="city.prefCode"
+      >
+        {{ city.prefName }}
+      </option>
+    </select>
+
+    <router-link v-if="city" :to="{ name: 'Town', params: { prefCode: city } }">
+      <button class="showTown">
+        Show Town <fa :icon="['fas', 'angle-double-right']"></fa>
+      </button>
+    </router-link>
+  </form>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      cities: [],
+      city: 0,
+    };
+  },
+  async mounted() {
+    await fetch("https://opendata.resas-portal.go.jp/api/v1/prefectures", {
+      method: "GET",
+      headers: {
+        "X-API-KEY": "fkbgSWJE8m21DD27xM5AJfIQwN14LCVs5jfVopTp",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => (this.cities = data.result))
+      .catch((err) => console.log(err));
+  },
+};
 </script>
 
-<style></style>
+<style>
+form {
+  max-width: 720px;
+  margin: 30px auto;
+  background: white;
+  text-align: left;
+  padding: 40px;
+  border-radius: 10px;
+  min-height: 200px;
+}
+label {
+  color: #aaa;
+  display: inline-block;
+  margin: 25px 0 15px;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+input,
+select {
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
+.showTown {
+  float: right;
+  margin-top: 70px;
+  background: #673ab7;
+  border-radius: 6px;
+  height: 3.2em;
+  width: 8.6em;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+.showTown a {
+  text-decoration: none;
+  font-size: 1.2em;
+}
+</style>
