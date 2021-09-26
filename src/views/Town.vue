@@ -6,14 +6,18 @@
         Back
       </button>
     </router-link>
-
     <div class="container">
       <div v-for="town in towns" :key="town.cityCode" class="town">
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          :value="town.cityCode"
+          v-model="checked"
+          @change="updateChecked(town.cityName)"
+        />
         <label>{{ town.cityName }}</label>
       </div>
     </div>
-    <Chart />
+    <Chart v-if="checked.length > 0" :data="data" />
   </form>
 </template>
 <script>
@@ -26,9 +30,11 @@ export default {
     return {
       prefCode: this.$route.params.prefCode,
       towns: [],
+      checked: [],
+      data: [],
+      category: [],
     };
   },
-  // Problem: It's keep endering nonstop. Fix it!
   async mounted() {
     await fetch(
       "https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=" +
@@ -43,6 +49,36 @@ export default {
       .then((res) => res.json())
       .then((data) => (this.towns = data.result))
       .catch((err) => console.log(err));
+  },
+  methods: {
+    async updateChecked(name) {
+      this.data = [];
+      for (let i = 0; i < this.checked.length; ++i) {
+        await fetch(
+          "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=" +
+            this.checked[i] +
+            "&prefCode=" +
+            this.prefCode,
+          {
+            method: "GET",
+            headers: {
+              "X-API-KEY": "fkbgSWJE8m21DD27xM5AJfIQwN14LCVs5jfVopTp",
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            var raw = data.result.data[0].data;
+            var value = raw.map((value) => value.value);
+            // this.category = raw.map((value) => value.year);
+            var newData = { name: name, data: value };
+            this.data.push(newData);
+            // Problem Here
+            console.log(this.data.target);
+          })
+          .catch((err) => console.log(err));
+      }
+    },
   },
 };
 </script>

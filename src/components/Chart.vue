@@ -1,7 +1,7 @@
 <template>
   <div>
     <apexchart
-      width="500"
+      width="100%"
       type="line"
       :options="options"
       :series="series"
@@ -10,26 +10,23 @@
 </template>
 <script>
 export default {
+  props: {
+    data: Array,
+  },
   data() {
     return {
       options: {
         chart: {
-          id: "vuechart-example",
+          id: "poppulartion",
         },
         xaxis: {
           categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
         },
+        stroke: {
+          curve: "smooth",
+        },
       },
-      series: [
-        {
-          name: "series-1",
-          data: [30, 40, 45, 50, 49, 60, 70, 91],
-        },
-        {
-          name: "Ok2",
-          data: [20, 40, 60, 80],
-        },
-      ],
+      series: this.data,
     };
   },
 };
