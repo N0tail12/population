@@ -3,7 +3,7 @@ import City from "../views/City.vue";
 import Town from "../views/Town.vue";
 const routes = [
   {
-    path: "/jobs",
+    path: "/",
     name: "City",
     component: City,
   },
