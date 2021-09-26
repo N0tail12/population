@@ -6,7 +6,7 @@
         Back
       </button>
     </router-link>
-    <div class="container">
+    <div class="container" v-if="towns.length > 0">
       <div v-for="town in towns" :key="town.cityCode" class="town">
         <input
           type="checkbox"
@@ -17,7 +17,49 @@
         <label>{{ town.cityName }}</label>
       </div>
     </div>
-    <Chart v-if="checked.length > 0" :data="data" />
+    <div class="container" v-else>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+      <div>
+        <input type="checkbox" class="skeleton" disabled />
+        <label class="skeleton skeleton-text"></label>
+      </div>
+    </div>
+    <Chart v-if="this.data.length > 0" :data="data" />
   </form>
 </template>
 <script>
@@ -32,7 +74,6 @@ export default {
       towns: [],
       checked: [],
       data: [],
-      category: [],
     };
   },
   async mounted() {
@@ -70,11 +111,8 @@ export default {
           .then((data) => {
             var raw = data.result.data[0].data;
             var value = raw.map((value) => value.value);
-            // this.category = raw.map((value) => value.year);
             var newData = { name: name, data: value };
             this.data.push(newData);
-            // Problem Here
-            console.log(this.data.target);
           })
           .catch((err) => console.log(err));
       }
@@ -107,6 +145,26 @@ input[type="checkbox"] {
 .backBtn a {
   text-decoration: none;
   font-size: 1.2em;
+}
+
+.skeleton {
+  margin-bottom: 0.5em;
+  opacity: 0.7;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.skeleton-text {
+  height: 0.5em;
+  width: 80%;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
 }
 @media screen and (max-width: 480px) {
   .container {
