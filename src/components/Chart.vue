@@ -20,7 +20,10 @@ export default {
           id: "poppulartion",
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          categories: [
+            1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025, 2030,
+            2035, 2040, 2045, 2050,
+          ],
         },
         stroke: {
           curve: "smooth",
