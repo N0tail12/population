@@ -170,15 +170,24 @@ input[type="checkbox"] {
   .container {
     grid-template-columns: auto auto auto;
   }
+  form {
+    padding: 10px;
+  }
 }
 @media screen and (max-width: 320px) {
   .container {
     grid-template-columns: auto auto;
   }
+  form {
+    padding: 5px;
+  }
 }
 @media screen and (max-width: 240px) {
   .container {
     grid-template-columns: auto auto;
+  }
+  form {
+    padding: 0px;
   }
 }
 </style>
