@@ -115,13 +115,11 @@ export default {
             var name = this.towns.filter((value) => {
               if (value.cityCode == this.checked[i]) return value.cityName;
             });
-            console.log(this.checked);
             var raw = data.result.data[0].data;
             var value = raw.map((value) => value.value);
             var newData = { name: name[0].cityName, data: value };
             if (!this.data.some((obj) => obj.name == name[0].cityName))
               this.data.push(newData);
-            console.log(this.data);
           })
           .catch((err) => console.log(err));
       }
