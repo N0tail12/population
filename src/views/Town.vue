@@ -12,7 +12,7 @@
           type="checkbox"
           :value="town.cityCode"
           v-model="checked"
-          @change="updateChecked(town.cityName)"
+          @change="updateChecked"
         />
         <label>{{ town.cityName }}</label>
       </div>
@@ -59,7 +59,10 @@
         <label class="skeleton skeleton-text"></label>
       </div>
     </div>
-    <Chart v-if="this.data.length > 0" :data="data" />
+    <Chart
+      :data="data"
+      v-if="this.data.length > 0 && this.checked.length > 0"
+    />
   </form>
 </template>
 <script>
@@ -92,7 +95,7 @@ export default {
       .catch((err) => console.log(err));
   },
   methods: {
-    async updateChecked(name) {
+    async updateChecked() {
       this.data = [];
       for (let i = 0; i < this.checked.length; ++i) {
         await fetch(
@@ -109,10 +112,16 @@ export default {
         )
           .then((res) => res.json())
           .then((data) => {
+            var name = this.towns.filter((value) => {
+              if (value.cityCode == this.checked[i]) return value.cityName;
+            });
+            console.log(this.checked);
             var raw = data.result.data[0].data;
             var value = raw.map((value) => value.value);
-            var newData = { name: name, data: value };
-            this.data.push(newData);
+            var newData = { name: name[0].cityName, data: value };
+            if (!this.data.some((obj) => obj.name == name[0].cityName))
+              this.data.push(newData);
+            console.log(this.data);
           })
           .catch((err) => console.log(err));
       }
