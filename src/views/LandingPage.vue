@@ -24,9 +24,6 @@ export default {};
 </script>
 
 <style>
-.reveal {
-  display: none;
-}
 .main_content {
   color: white;
   display: flex;
@@ -41,7 +38,7 @@ export default {};
   position: relative;
   margin: 0 auto;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
   animation: taadaa 2s ease;
 }
 

@@ -63,7 +63,7 @@ label {
   color: #aaa;
   display: inline-block;
   margin: 25px 0 15px;
-  font-size: 0.7em;
+  font-size: 0.9em;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;

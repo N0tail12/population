@@ -6,6 +6,8 @@
         Back
       </button>
     </router-link>
+    <br />
+    <label>都道府県</label>
     <div class="container" v-if="towns.length > 0">
       <div v-for="town in towns" :key="town.prefCode" class="town">
         <input
@@ -127,9 +129,6 @@ export default {
 };
 </script>
 <style>
-.reveal {
-  display: inline-block !important;
-}
 input[type="checkbox"] {
   display: inline-block;
   width: 16px;
@@ -175,12 +174,28 @@ input[type="checkbox"] {
     background-color: hsl(200, 20%, 95%);
   }
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    grid-template-columns: auto auto auto;
+  }
+  form {
+    padding: 10px;
+  }
+  label {
+    font-size: 0.7em;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .container {
     grid-template-columns: auto auto auto;
   }
   form {
     padding: 10px;
+  }
+  label {
+    font-size: 0.6em;
   }
 }
 @media screen and (max-width: 320px) {
