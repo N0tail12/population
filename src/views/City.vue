@@ -80,7 +80,7 @@ select {
 }
 .showTown {
   float: right;
-  margin-top: 70px;
+  margin-top: 40px;
   background: #673ab7;
   border-radius: 6px;
   height: 3.2em;
@@ -92,5 +92,20 @@ select {
 .showTown a {
   text-decoration: none;
   font-size: 1.2em;
+}
+@media screen and (max-width: 480px) {
+  .showTown {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .showTown {
+    margin-top: 15px;
+  }
+}
+@media screen and (max-width: 240px) {
+  .showTown {
+    margin-top: 10px;
+  }
 }
 </style>
