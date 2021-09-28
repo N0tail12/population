@@ -151,6 +151,9 @@ input[type="checkbox"] {
   color: white;
   cursor: pointer;
 }
+.backBtn:hover {
+  background: #673ab7bd;
+}
 .backBtn a {
   text-decoration: none;
   font-size: 1.2em;

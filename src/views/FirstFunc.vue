@@ -127,6 +127,9 @@ export default {
 };
 </script>
 <style>
+.reveal {
+  display: inline-block !important;
+}
 input[type="checkbox"] {
   display: inline-block;
   width: 16px;
