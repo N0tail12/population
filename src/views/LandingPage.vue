@@ -91,4 +91,20 @@ export default {};
     opacity: 1;
   }
 }
+@media screen and (max-width: 480px) {
+  .button_group button {
+    width: 9rem;
+  }
+}
+@media screen and (max-width: 320px) {
+  .button_group button {
+    width: 8rem;
+  }
+}
+@media screen and (max-width: 280px) {
+  .button_group button {
+    font-size: 0.75rem;
+    width: 7rem;
+  }
+}
 </style>

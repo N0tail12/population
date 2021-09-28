@@ -106,7 +106,7 @@ select {
     margin-top: 15px;
   }
 }
-@media screen and (max-width: 240px) {
+@media screen and (max-width: 280px) {
   .showTown {
     margin-top: 10px;
   }

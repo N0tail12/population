@@ -206,7 +206,7 @@ input[type="checkbox"] {
     padding: 5px;
   }
 }
-@media screen and (max-width: 240px) {
+@media screen and (max-width: 280px) {
   .container {
     grid-template-columns: auto auto;
   }
