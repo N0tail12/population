@@ -1,8 +1,15 @@
 <template>
   <form>
-    <label for="">City:</label>
+    <router-link :to="{ name: 'LandingPage' }">
+      <button class="backBtn">
+        <fa :icon="['fas', 'angle-double-left']"></fa>
+        Back
+      </button>
+    </router-link>
+    <br />
+    <label for="">City/Province:</label>
     <select name="" id="" v-model="city">
-      <option value="0" disabled>--Select City--</option>
+      <option value="0" disabled>--Select City/Provine--</option>
       <option
         v-for="city in cities"
         :key="city.prefCode"
@@ -14,7 +21,7 @@
 
     <router-link v-if="city" :to="{ name: 'Town', params: { prefCode: city } }">
       <button class="showTown">
-        Show Town <fa :icon="['fas', 'angle-double-right']"></fa>
+        Show Districts <fa :icon="['fas', 'angle-double-right']"></fa>
       </button>
     </router-link>
   </form>
