@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">Population<span></span></h1>
+  <h1 class="reveal">Population<span></span></h1>
   <router-view />
 </template>
 
@@ -18,14 +18,14 @@ body {
   margin: 0;
   background: #eee;
 }
-.title {
+.reveal {
   display: inline-block;
   position: relative;
   padding-bottom: 5px;
-  border-bottom: 3px solid black;
+  /* border-bottom: 3px solid black; */
   font-family: "PT Sans", sans-serif;
 }
-.title span {
+.reveal span {
   position: absolute;
   left: 0;
   top: 0;

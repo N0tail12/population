@@ -1,20 +1,20 @@
 <template>
   <form>
-    <router-link :to="{ name: 'City' }">
+    <router-link :to="{ name: 'LandingPage' }">
       <button class="backBtn">
         <fa :icon="['fas', 'angle-double-left']"></fa>
         Back
       </button>
     </router-link>
     <div class="container" v-if="towns.length > 0">
-      <div v-for="town in towns" :key="town.cityCode" class="town">
+      <div v-for="town in towns" :key="town.prefCode" class="town">
         <input
           type="checkbox"
-          :value="town.cityCode"
+          :value="town.prefCode"
           v-model="checked"
           @change="updateChecked"
         />
-        <label>{{ town.cityName }}</label>
+        <label>{{ town.prefName }}</label>
       </div>
     </div>
     <div class="container" v-else>
@@ -80,16 +80,12 @@ export default {
     };
   },
   async mounted() {
-    await fetch(
-      "https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=" +
-        this.prefCode,
-      {
-        method: "GET",
-        headers: {
-          "X-API-KEY": "fkbgSWJE8m21DD27xM5AJfIQwN14LCVs5jfVopTp",
-        },
-      }
-    )
+    await fetch("https://opendata.resas-portal.go.jp/api/v1/prefectures", {
+      method: "GET",
+      headers: {
+        "X-API-KEY": "fkbgSWJE8m21DD27xM5AJfIQwN14LCVs5jfVopTp",
+      },
+    })
       .then((res) => res.json())
       .then((data) => (this.towns = data.result))
       .catch((err) => console.log(err));
@@ -99,10 +95,7 @@ export default {
       this.data = [];
       for (let i = 0; i < this.checked.length; ++i) {
         await fetch(
-          "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=" +
-            this.checked[i] +
-            "&prefCode=" +
-            this.prefCode,
+          `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${this.checked[i]}`,
           {
             method: "GET",
             headers: {
@@ -112,16 +105,19 @@ export default {
         )
           .then((res) => res.json())
           .then((data) => {
+            console.log(this.towns);
+            console.log(this.checked);
             var name = this.towns.filter((value) => {
-              if (value.cityCode == this.checked[i]) return value.cityName;
+              if (value.prefCode == this.checked[i]) return value.prefName;
             });
+            console.log(data.result.data[0].data);
             var raw = data.result.data[0].data;
-
             var value = raw
               .filter((value) => value.year >= 1980 && value.year <= 2015)
               .map((value) => value.value);
-            var newData = { name: name[0].cityName, data: value };
-            if (!this.data.some((obj) => obj.name == name[0].cityName))
+            console.log(value);
+            var newData = { name: name[0].prefName, data: value };
+            if (!this.data.some((obj) => obj.name == name[0].prefName))
               this.data.push(newData);
           })
           .catch((err) => console.log(err));
@@ -151,19 +147,23 @@ input[type="checkbox"] {
   color: white;
   cursor: pointer;
 }
+
 .backBtn a {
   text-decoration: none;
   font-size: 1.2em;
 }
+
 .skeleton {
   margin-bottom: 0.5em;
   opacity: 0.7;
   animation: skeleton-loading 1s linear infinite alternate;
 }
+
 .skeleton-text {
   height: 0.5em;
   width: 80%;
 }
+
 @keyframes skeleton-loading {
   0% {
     background-color: hsl(200, 20%, 70%);
