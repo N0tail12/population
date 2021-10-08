@@ -23,7 +23,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .main_content {
   color: white;
   display: flex;
