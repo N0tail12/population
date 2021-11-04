@@ -74,6 +74,7 @@ export default {
   data() {
     return {
       prefCode: this.$route.params.prefCode,
+      VUE_APP_X_API_KEY: process.env.VUE_APP_X_API_KEY,
       towns: [],
       checked: [],
       data: [],
@@ -86,7 +87,7 @@ export default {
       {
         method: "GET",
         headers: {
-          "X-API-KEY": "fkbgSWJE8m21DD27xM5AJfIQwN14LCVs5jfVopTp",
+          "X-API-KEY": this.VUE_APP_X_API_KEY,
         },
       }
     )
@@ -106,7 +107,7 @@ export default {
           {
             method: "GET",
             headers: {
-              "X-API-KEY": "fkbgSWJE8m21DD27xM5AJfIQwN14LCVs5jfVopTp",
+              "X-API-KEY": this.VUE_APP_X_API_KEY,
             },
           }
         )
