@@ -1,8 +1,15 @@
 <template>
   <form>
-    <label for="">City:</label>
+    <router-link :to="{ name: 'LandingPage' }">
+      <button class="backBtn">
+        <fa :icon="['fas', 'angle-double-left']"></fa>
+        Back
+      </button>
+    </router-link>
+    <br />
+    <label for="">City/Province:</label>
     <select name="" id="" v-model="city">
-      <option value="0" disabled>--Select City--</option>
+      <option value="0" disabled>--Select City/Provine--</option>
       <option
         v-for="city in cities"
         :key="city.prefCode"
@@ -14,7 +21,7 @@
 
     <router-link v-if="city" :to="{ name: 'Town', params: { prefCode: city } }">
       <button class="showTown">
-        Show Town <fa :icon="['fas', 'angle-double-right']"></fa>
+        Show Districts <fa :icon="['fas', 'angle-double-right']"></fa>
       </button>
     </router-link>
   </form>
@@ -56,7 +63,7 @@ label {
   color: #aaa;
   display: inline-block;
   margin: 25px 0 15px;
-  font-size: 0.7em;
+  font-size: 0.9em;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
@@ -73,7 +80,7 @@ select {
 }
 .showTown {
   float: right;
-  margin-top: 70px;
+  margin-top: 40px;
   background: #673ab7;
   border-radius: 6px;
   height: 3.2em;
@@ -82,8 +89,26 @@ select {
   cursor: pointer;
   color: white;
 }
+.showTown:hover {
+  background: #673ab7bd;
+}
 .showTown a {
   text-decoration: none;
   font-size: 1.2em;
+}
+@media screen and (max-width: 480px) {
+  .showTown {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .showTown {
+    margin-top: 15px;
+  }
+}
+@media screen and (max-width: 280px) {
+  .showTown {
+    margin-top: 10px;
+  }
 }
 </style>
