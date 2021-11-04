@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       cities: [],
+      VUE_APP_X_API_KEY: process.env.VUE_APP_X_API_KEY,
       city: 0,
     };
   },
@@ -39,7 +40,7 @@ export default {
     await fetch("https://opendata.resas-portal.go.jp/api/v1/prefectures", {
       method: "GET",
       headers: {
-        "X-API-KEY": "fkbgSWJE8m21DD27xM5AJfIQwN14LCVs5jfVopTp",
+        "X-API-KEY": this.VUE_APP_X_API_KEY,
       },
     })
       .then((res) => res.json())
