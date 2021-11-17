@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main_content">
-      <h1>Welcome to my Yumemi's FE Project</h1>
+      <h1>Welcome to my Population Project</h1>
       <h2>There are 2 options down bellow.</h2>
       <ul>
         <li>Show Data of City/Province</li>
