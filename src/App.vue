@@ -35,6 +35,26 @@ body {
   animation: overlay 1s ease forwards;
   animation-delay: 0.5s;
 }
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #202225;
+  border: 2px solid #282a2d;
+  border-radius: 10px;
+}
 @keyframes overlay {
   50% {
     width: 100%;
