@@ -51,8 +51,8 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #202225;
-  border: 2px solid #282a2d;
+  background-color: #7d7f81;
+  border: 2px solid #80858a;
   border-radius: 10px;
 }
 @keyframes overlay {
